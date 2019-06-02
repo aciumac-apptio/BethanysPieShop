@@ -1,29 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using BethanysPieShop.Web.Models;
+using BethanysPieShop.Web.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+
+// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BethanysPieShop.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IPieRepository _pieRepository;
+
+        public HomeController(IPieRepository pieRepository)
+        {
+            _pieRepository = pieRepository;
+        }
+
+        // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
-        }
+            ViewBag.Title = "Pie Overview";
+            var pies = _pieRepository.GetAllPies().OrderBy(p => p.Name);
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+            var homeViewModel = new HomeViewModel()
+            {
+                Title = "Welcome to Bethany's Pie Shop",
+                Pies = pies.ToList()
+            };
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(homeViewModel);
         }
     }
 }
