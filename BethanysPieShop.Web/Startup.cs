@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BethanysPieShop.Web.EFModels;
 using BethanysPieShop.Web.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -34,8 +29,8 @@ namespace BethanysPieShop.Web
 
 
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            services.AddTransient<IPieRepository, MockPieRepository>();            
+            services.AddDbContext<bethanypiesContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DataAccessPostgreSqlProvider")));
+            services.AddTransient<IPieRepository, PieRepository>();            
             services.AddMvc();
         }
 

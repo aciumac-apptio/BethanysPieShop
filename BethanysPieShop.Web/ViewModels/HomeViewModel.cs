@@ -1,4 +1,5 @@
-﻿using BethanysPieShop.Web.Models;
+﻿using BethanysPieShop.Web.EFModels;
+using BethanysPieShop.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

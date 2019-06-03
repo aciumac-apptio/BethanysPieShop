@@ -1,13 +1,12 @@
 ﻿@model BethanysPieShop.Web.ViewModels.HomeViewModel
 
-
 <h2>@Model.Title</h2>
 
 <div class="row">
     @foreach (var pie in Model.Pies)
     {
-        <div class="col-sm-4 col-lg-4 col-md-4" >
-            <div class="thumbnail" style="background-color:white; border: 1px solid blue;">
+        <div class="col-sm-4 col-lg-4 col-md-4" style="padding-bottom: 20px;">
+            <div class="thumbnail">
                 <img src="@pie.ImageThumbnailUrl" alt="">
                 <div class="caption">
                     <h3 class="pull-right">@pie.Price.ToString("c")</h3>
