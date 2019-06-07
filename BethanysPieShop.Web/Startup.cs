@@ -29,8 +29,9 @@ namespace BethanysPieShop.Web
 
 
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddDbContext<bethanypiesContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DataAccessPostgreSqlProvider")));
+            services.AddDbContext<AppDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DataAccessPostgreSqlProvider")));
             services.AddTransient<IPieRepository, PieRepository>();            
+            services.AddTransient<IFeedbackRepository, FeedbackRepository>();            
             services.AddMvc();
         }
 

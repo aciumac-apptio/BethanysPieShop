@@ -4,17 +4,18 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace BethanysPieShop.Web.EFModels
 {
-    public partial class bethanypiesContext : DbContext
+    public partial class AppDbContext : DbContext
     {
-        public bethanypiesContext()
+        public AppDbContext()
         {
         }
 
-        public bethanypiesContext(DbContextOptions<bethanypiesContext> options)
+        public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
         }
 
+        public virtual DbSet<Feedback> Feedback { get; set; }
         public virtual DbSet<Pie> Pie { get; set; }
 
 //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -29,6 +30,23 @@ namespace BethanysPieShop.Web.EFModels
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
+
+            modelBuilder.Entity<Feedback>(entity =>
+            {
+                entity.ToTable("feedback");
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.Message)
+                    .IsRequired()
+                    .HasMaxLength(300);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100);
+            });
 
             modelBuilder.Entity<Pie>(entity =>
             {
