@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BethanysPieShop.Web.EFModels
+﻿namespace BethanysPieShop.Web.EFModels
 {
     public partial class Pie
     {
